@@ -4,6 +4,7 @@
     "type": "library",
     "require": {
         "lephare/doctrine-json-translation": "^2.0",
+        "php": "^8.2",
         "symfony/config": "^7.4|^8.0",
         "symfony/dependency-injection": "^7.4|^8.0",
         "symfony/http-kernel": "^7.4|^8.0"
@@ -15,8 +16,19 @@
     },
     "license": "MIT",
     "scripts": {
+        "analyse": "vendor/bin/phpstan --memory-limit=512M analyse --no-progress --configuration phpstan.neon.dist",
+        "lint": [
+          "./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --dry-run"
+        ],
+        "lint:ci": "@lint --using-cache=no",
         "lint:fix": [
-            "./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php"
+          "./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php"
         ]
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.94",
+        "kubawerlos/php-cs-fixer-custom-fixers": "^3.36",
+        "phpstan/phpstan": "^2.1",
+        "ekino/phpstan-banned-code": "^3.1"
     }
 }
